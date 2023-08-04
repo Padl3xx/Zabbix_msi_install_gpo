@@ -1,8 +1,10 @@
-##This script is used to install and update zabbix agent version 2
+##This script is used to install and update zabbix agent version 2 via GPO
 #
 ##Author: https://github.com/Padl3xx
 #
 ##The script starts the GPO when the computer starts, it is applied to computers, not users.
+##Create a new GPO, go to, Computer Configuration -> Policies -> Windows Settings -> Scripts -> Startup -> Powershell Scripts -> Add.
+##It should probably work if you run the installation directly from your computer, but I haven't tried that.
 #
 # Construct the FQDN (Fully Qualified Domain Name) of the local computer
 $FQDN=(Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
@@ -16,7 +18,7 @@ $ZabbixServerIP = "8.8.8.8"
 #$ZabbixPluginFolder = "\\yourdomain.com\NETLOGON\ZabbixAgent2\zabbix_agent2.d\"
 #$ZabbixScriptsFolder = "\\yourdomain.com\NETLOGON\ZabbixAgent2\scripts"
 
-# Do not change below!
+# Be careful what you change here
 
 $ZabbixSoftwareName = "Zabbix Agent 2 (64-bit)"
 $InstalledZabbixVersion = (Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq $ZabbixSoftwareName }).Version
